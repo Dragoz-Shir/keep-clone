@@ -6,7 +6,7 @@ import CreateArea from "./CreateArea";
 
 function App() {
   const [newNote,setNewNote] = useState([
-    {title:"holi",content:"contenido"},{title:"holi",content:"contenido"}
+   
   ]);
 
   function clickedButton(info){
@@ -18,7 +18,15 @@ function App() {
      return [...prevVa,info]
     })
   }
-
+  
+function deleteNote(id){
+  
+   setNewNote(newNote.filter((n,index)=>{
+  return index!==id
+  
+}))
+   
+}
 
 
   return (
@@ -26,7 +34,7 @@ function App() {
       <Header />
       <CreateArea onAdd={clickedButton}/>
      {
-     newNote.map((n,index)=>{return <Note key={index} title={n.title} content={n.content}/> })
+     newNote.map((n,index)=>{return <Note key={index} title={n.title} content={n.content} delete={()=>{deleteNote(index)}}/> })
      } 
      <Footer />
     </div>
