@@ -1,5 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React,{ useState } from "react";
+
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import Zoom from '@material-ui/core/Zoom';
+
+
 
 function CreateArea(props) {
 
@@ -7,6 +12,8 @@ function CreateArea(props) {
     title: "",
     content:""
   });
+
+  const [clickTextArea,setClick] = useState(false);
 
   function handleContent(event) {
 
@@ -25,7 +32,10 @@ function CreateArea(props) {
     }
   }
 
-
+function olvo ()
+{
+  setClick(true)
+}
   function o (e){
     e.preventDefault();
   }
@@ -33,16 +43,18 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form onSubmit={o}>
-        <input name="title" placeholder="Title" onChange={handleContent} value={info.title}/>
-        <textarea onChange={handleContent} value={info.content} name="content" placeholder="Take a note..." rows="3" />
-        <button onClick={()=>{
+      <form onSubmit={o} className="create-note">
+        { clickTextArea ? <input name="title" placeholder="Title" onChange={handleContent} value={info.title}/> : null}
+        <textarea onClick={olvo} onChange={handleContent} value={info.content} name="content" placeholder="Take a note..." rows={clickTextArea ? "3" : "1"} />
+       
+       <Zoom in={clickTextArea ? true:false}>
+        <Fab onClick={()=>{
           props.onAdd(info)
           setInfo({
             title: "",
             content:""
           })
-        }}>Add</button>
+        }}> <AddIcon/></Fab></Zoom>
       </form>
     </div>
   );

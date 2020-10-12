@@ -17,6 +17,7 @@ function App() {
     setNewNote(prevVa=>{
      return [...prevVa,info]
     })
+    
   }
   
 function deleteNote(id){
